@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include "Creatures.h"
 #include "FuncCreatures.h"
+#include "FuncChest.h"
+#include "Chest.h"
+#include "math.h"
 Creatures attack(Creatures attacker, Creatures target) {
     int dx = attacker.creature_location[0] - target.creature_location[0];
     int dy = attacker.creature_location[1] - target.creature_location[1];
@@ -63,6 +66,13 @@ bool visibility(Creatures entity, Creatures other_entities) {
     int visibility_radius_squared = entity.radius_of_visibility * entity.radius_of_visibility;
     return distance_squared <= visibility_radius_squared;
 }
+
+bool visibility_with_chest(Creatures hero, Chest chest) {
+    // Реализуйте логику видимости, например, проверку расстояния
+    float distance = sqrt(pow(hero.x - chest.x, 2) + pow(hero.y - chest.y, 2));
+    return distance < 3.0; // Пример: если расстояние меньше 5, сундук виден
+}
+
 
 void print_creature(Creatures entity) {
     printf("%s:\n", entity.name);
